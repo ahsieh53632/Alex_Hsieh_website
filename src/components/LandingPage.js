@@ -153,7 +153,7 @@ function LandingPage(props) {
             <Button
               variant="outlined"
               className={classes.resumeButton}
-              onClick={() => alert("please email me for my resume :)")}
+              onClick={() => window.open("https://drive.google.com/file/d/1o64Ugjwgto8Hn4aa7Sv9MPpfzbVSkRBH/view?usp=sharing")}
             >
               <Typography
                 variant="subtitle2"
