@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     width: "35vw",
     height: "25vw",
     maxWidth: "60vw",
+    maxHeight: "600px",
     background: `url(${process.env.PUBLIC_URL + "/img/" + img})`,
     backgroundSize: "cover",
     backgroundPosition: "50% 50%",

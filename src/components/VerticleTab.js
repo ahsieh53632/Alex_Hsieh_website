@@ -126,7 +126,7 @@ export default function VerticalTabs(props) {
       {props.data &&
         props.data.map((item, index) => (
           <TabPanel value={value} index={index}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "column", maxHeight: "45vh" }}>
               {/* <Avatar alt={item.name} src={item.logo} variant="square" className={classes.icon} /> */}
               <Typography variant="h5" className={classes.position}>
                 <span style={{ fontSize: "2.5rem", color: "white" }}>

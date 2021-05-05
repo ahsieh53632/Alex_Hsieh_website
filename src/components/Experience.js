@@ -18,7 +18,7 @@ import particlesConfig from "../config/particlesConfig";
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
-    paddingTop: "10rem",
+    paddingTop: "5%",
     backgroundColor: lighten(theme.palette.background.blue, 0.05),
     // backgroundPosition: "center 50%",
     //...theme.typography.fontFamily,
