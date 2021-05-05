@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: `${fade("#379683", 0.7)}`,
     width: "35vw",
     height: "25vw",
+    maxHeight: "600px",
     transition: "opacity 500ms ease-in-out",
 
     "&:hover": {
