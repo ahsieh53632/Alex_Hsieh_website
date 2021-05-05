@@ -15,10 +15,13 @@ import VerticleTabs from "./VerticleTab";
 import Particles from "react-particles-js";
 import particlesConfig from "../config/particlesConfig";
 
+import ProjectDescription from "./ProjectDescription";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
     paddingTop: "10rem",
+    paddingBottom: "10rem",
     backgroundColor: "#233554",
     // backgroundPosition: "center 50%",
     //...theme.typography.fontFamily,
@@ -33,10 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
   ExpContainer: {
     position: "relative",
-    height: "75vh",
+    minHeight: "75vh",
     width: "80vw",
     border: "3px solid tranparent",
-    margin: "0 auto",
+    margin: "0 auto auto auto",
+    paddingBottom: "50px",
     backgroundColor: `transparent`,
     borderTopRightRadius: "15px",
     borderBottomLeftRadius: "15px",
@@ -71,6 +75,11 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.darkGreen.main}`,
     padding: "30px 3rem 0px 50px",
   },
+
+  projectContainer: {
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 const ColoredLine = ({ color = "#8892b0", style }) => (
@@ -90,21 +99,24 @@ function Projects(props) {
   const classes = useStyles();
 
   return (
-    <>
-      <div style={{ position: "absolute" }}>
-        <Particles height="90vh" width="90vw" params={particlesConfig} />
-      </div>
+    <div style={{ height: "unset" }}>
       <div className={classes.root} ref={props?.forwardedRef}>
+        <div style={{ position: "absolute" }}>
+          <Particles height="100%" width="90vw" params={particlesConfig} />
+        </div>
         <div className={classes.ExpContainer}>
           <span className={classes.spanCorner}></span>
           <Typography variant="h2" className={classes.title} align="right">
             Projects
           </Typography>
           <ColoredLine style={{ width: "50%", marginRight: "3rem" }} />
-          
+          <div className={classes.projectContainer}>
+            <ProjectDescription direction={"left"} />
+            <ProjectDescription  />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

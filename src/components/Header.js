@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
   textButton: {
     color: "white",
+    fontSize: "1.5rem",
     "&:hover": {
       color: theme.palette.red.main,
       transition: "250ms cubic-bezier(0.4, 0, 0.2, 1)",
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   coloredText: {
     color: fade(theme.palette.red.main, 1),
-    fontSize: "1rem",
+    fontSize: "1.25rem",
     // paddingRight: ".3rem",
   },
 }));
@@ -80,13 +81,13 @@ const Header = () => {
           <div id="filler" style={{ flexGrow: 1 }} />
           {sections.map((section, index) => (
             <Button
-              variant="text"
+              variant="subtitle1"
               className={classes.textButton}
               disableFocusRipple
               disableRipple
               key={index}
             >
-              <Typography variant="subtitle2" style={{ padding: ".3rem" }}>
+              <Typography variant="h6" style={{ padding: ".3rem" }}>
                 <span className={classes.coloredText}>{`${section.substring(
                   0,
                   2
