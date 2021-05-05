@@ -4,9 +4,8 @@ import {
   Typography,
   lighten,
   fade,
-  Tab,
-  Tabs,
   Box,
+  Button,
 } from "@material-ui/core";
 
 import experienceData from "../static/experience";
@@ -16,6 +15,8 @@ import Particles from "react-particles-js";
 import particlesConfig from "../config/particlesConfig";
 
 import ProjectDescription from "./ProjectDescription";
+
+import projectData from "../static/projectData"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +81,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+
+  checkMoreButton: {
+    color: "white",
+    fontSize: "1.5rem",
+    borderRadius: "10px",
+    padding: "30px",
+    border: `3px dashed ${theme.palette.darkGreen.main}`,
+    "&:hover" : {
+      backgroundColor: `${lighten(theme.palette.red.main, .7)}`,
+      border: "none"
+    }
+  }
 }));
 
 const ColoredLine = ({ color = "#8892b0", style }) => (
@@ -102,7 +115,7 @@ function Projects(props) {
     <div style={{ height: "unset" }}>
       <div className={classes.root} ref={props?.forwardedRef}>
         <div style={{ position: "absolute" }}>
-          <Particles height="100%" width="90vw" params={particlesConfig} />
+          <Particles height="100vh" width="90vw" params={particlesConfig} />
         </div>
         <div className={classes.ExpContainer}>
           <span className={classes.spanCorner}></span>
@@ -111,8 +124,16 @@ function Projects(props) {
           </Typography>
           <ColoredLine style={{ width: "50%", marginRight: "3rem" }} />
           <div className={classes.projectContainer}>
-            <ProjectDescription direction={"left"} />
-            <ProjectDescription  />
+            {projectData.map((item, index) => (
+              <ProjectDescription direction={index % 2 === 0 ? "left" : "right"} {...item}/>
+            ))}
+          </div>
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+            <Button className={classes.checkMoreButton}
+              onClick={() => window.open("https://github.com/ahsieh53632")}
+            >
+              {`Check out my github for more :)`}
+            </Button>
           </div>
         </div>
       </div>

@@ -8,7 +8,10 @@ import {
   Tabs,
   Box,
   Avatar,
+  Icon,
 } from "@material-ui/core";
+
+import { ReactComponent as ArrowRight } from "../icons/right.svg";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,20 +55,43 @@ const useStyles = makeStyles((theme) => ({
   },
 
   icon: {
-      width: "70px",
-      height: "70px",
-      marginLeft: "15px",
-      objectFit: "cover",
-      borderRadius: "15px",
-      border: "2px solid white"
+    width: "70px",
+    height: "70px",
+    marginLeft: "15px",
+    objectFit: "cover",
+    borderRadius: "15px",
+    border: "2px solid white",
   },
 
   position: {
-      paddingLeft: "25px",
-      color: `${theme.palette.darkGreen.main}`
-      
-  }
+    paddingLeft: "25px",
+    color: `${theme.palette.darkGreen.main}`,
+  },
 
+  descriptionContainer: {
+    width: "60vw",
+    height: "50vh",
+    marginLeft: "2rem",
+    overflowY: "scroll",
+    display: "flex",
+    flexDirection: "column",
+    overflowWrap: "break-word"
+  },
+
+  description: {
+    fontSize: "1.2rem",
+    letterSpacing: ".2rem",
+    textAlign: "left",
+  },
+
+  arrowRight: {
+    fill: "white",
+    width: "50px",
+    height: "50px",
+    padding: "10px",
+    paddingTop: "2rem",
+    paddingBottom: "0",
+  }
 }));
 
 export default function VerticalTabs(props) {
@@ -89,17 +115,38 @@ export default function VerticalTabs(props) {
       >
         {props.data &&
           props.data.map((item, index) => (
-            <Tab label={item?.name || null} {...a11yProps(index)} disableRipple/>
+            <Tab
+              label={item?.name || null}
+              {...a11yProps(index)}
+              disableRipple
+            />
           ))}
       </Tabs>
 
       {props.data &&
         props.data.map((item, index) => (
           <TabPanel value={value} index={index}>
-            <div></div>
-            <div style={{display: "flex", alignItems: "center"}}>
-                <Avatar alt={item.name} src={item.logo} variant="square" className={classes.icon} />
-                <Typography variant="h5" className={classes.position}>{item.position}</Typography>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {/* <Avatar alt={item.name} src={item.logo} variant="square" className={classes.icon} /> */}
+              <Typography variant="h5" className={classes.position}>
+                <span style={{ fontSize: "2.5rem", color: "white" }}>
+                  {item.position.substring(0, 2)}
+                </span>
+                {item.position.substring(2)}
+              </Typography>
+
+              <div className={classes.descriptionContainer}>
+                {item.description.map((text, index) => (
+                  <Typography
+                    key={index}
+                    variant="subtitle1"
+                    className={classes.description}
+                  >
+                    <Icon><ArrowRight className={classes.arrowRight} /></Icon>
+                    {text}
+                  </Typography>
+                ))}
+              </div>
             </div>
           </TabPanel>
         ))}

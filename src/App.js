@@ -42,20 +42,40 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const sections = ["experience", "projects"];
+
+
 function App() {
   const classes = useStyles();
   const expRef = React.useRef(null);
-  const scrollDown = () => expRef?.current?.scrollIntoView({behavior: 'smooth'});
+  const projectsRef = React.useRef(null);
+  const mainRef = React.useRef(null);
+
+  const scrollDown = (ref) => {
+    let r = ref || expRef
+    r?.current?.scrollIntoView({behavior: 'smooth'});
+  }
+
+  const sections = ([
+    {
+      label: "experince",
+      ref: expRef
+    },
+    {
+      label: "projects",
+      ref: projectsRef
+    }
+  ])
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header />
-      <div className={classes.container}>
-        <LandingPage scrollDownFunc={scrollDown} />
+      <Header sections={sections} scrollDownFunc={scrollDown} mainRef={mainRef}/>
+      <div className={classes.container} ref={mainRef}>
+        <LandingPage scrollDownFunc={scrollDown} ref={mainRef} />
       </div>
       <Experience  ref={expRef}/>
-      <Projects />
+      <Projects ref={projectsRef} />
     </div>
   );
 }

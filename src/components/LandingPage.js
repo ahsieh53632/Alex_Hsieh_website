@@ -131,7 +131,7 @@ function LandingPage(props) {
             I am interested in full-stack development and Computer Vision
           </Typography>
           <Typography variant="subtitle1" className={classes.subTitle}>
-            Recent Graduate @ University of Maryland - College Park
+            Senior @ University of Maryland - College Park, Expected May 2021
           </Typography>
           <div className={classes.iconDrawer}>
             <IconButton
@@ -150,7 +150,11 @@ function LandingPage(props) {
             >
               <LinkedInIcon className={classes.icon} />
             </IconButton>
-            <Button variant="outlined" className={classes.resumeButton}>
+            <Button
+              variant="outlined"
+              className={classes.resumeButton}
+              onClick={() => alert("please email me for my resume :)")}
+            >
               <Typography
                 variant="subtitle2"
                 style={{ border: "none", padding: ".3rem" }}
@@ -169,7 +173,10 @@ function LandingPage(props) {
         </div>
       </div>
 
-      <IconButton style={{ zIndex: 50, top: "90vh", right: "50%", position: "absolute" }} onClick={() => props.scrollDownFunc()}>
+      <IconButton
+        style={{ zIndex: 50, top: "90vh", right: "50%", position: "absolute" }}
+        onClick={() => props.scrollDownFunc()}
+      >
         <ScrollDownIcon
           className={classes.icon}
           style={{
@@ -185,4 +192,6 @@ function LandingPage(props) {
   );
 }
 
-export default LandingPage;
+export default React.forwardRef((props, ref) => (
+  <LandingPage {...props} forwardedRef={ref} />
+));

@@ -9,10 +9,10 @@ export default createMuiTheme({
           width: "20px",
         },
         '*::-webkit-scrollbar-track': {
-          backgroundColor: "#0a192f"
+          backgroundColor: "inherit"
         },
         '*::-webkit-scrollbar-thumb': {
-          backgroundColor: '#d6dee1',
+          backgroundColor: '#ccd6f6',
           borderRadius: "20px",
           border: "6px solid transparent",
           backgroundClip: "content-box",

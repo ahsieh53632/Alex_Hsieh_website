@@ -5,8 +5,10 @@ import {
   Toolbar,
   Typography,
   Button,
+  Slide,
+  fade,
 } from "@material-ui/core";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -14,10 +16,9 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid",
   },
   appbar: {
-    // background: `linear-gradient(to right bottom, ${theme.palette.background.blue}, 90%, rgba(255, 255, 255, .2))`,
-    background: "none",
+    background: `${fade(theme.palette.background.blue, 0.6)}`,
     padding: ".33rem 0 .33rem 0",
-    margin: ".33rem 0 .5rem 0",
+    margin: "0 0 .5rem 0",
   },
 
   toolbar: {
@@ -53,67 +54,97 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const sections = ["experience", "projects"];
-const Header = () => {
+
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+const Header = (props) => {
   const classes = useStyles();
+  const trigger = useScrollTrigger();
+
   return (
     <div>
-      <AppBar className={classes.appbar} elevation={0} sticky="true">
-        <Toolbar className={classes.toolbar}>
-          <Button>
-            <Typography
-              variant="body2"
-              className={classes.title}
-              color="secondary"
-              style={{ padding: ".5rem 1rem .5rem 1rem" }}
-            >
-              Alex Hsieh
-            </Typography>
-          </Button>
-          <Typography
-            variant="body2"
-            color="secondary"
-            style={{ padding: ".5rem 1rem .5rem 1rem", fontSize: ".8rem", fontFamily: "Roboto" }}
-          >
-              created and desgined by @Alex Hsieh 2021
-          </Typography>
-          {/* sections */}
-          <div id="filler" style={{ flexGrow: 1 }} />
-          {sections.map((section, index) => (
-            <Button
-              variant="subtitle1"
-              className={classes.textButton}
-              disableFocusRipple
-              disableRipple
-              key={index}
-            >
-              <Typography variant="h6" style={{ padding: ".3rem" }}>
-                <span className={classes.coloredText}>{`${section.substring(
-                  0,
-                  2
-                )}`}</span>
-                {section.substring(2)}
+      <ElevationScroll {...props}>
+        <Slide appear={false} direction="down" in={!trigger}>
+          <AppBar className={classes.appbar} elevation={1} sticky="true">
+            <Toolbar className={classes.toolbar}>
+              <Button
+                onClick={() => props.scrollDownFunc && props.scrollDownFunc(props.mainRef)}
+              >
+                <Typography
+                  variant="body2"
+                  className={classes.title}
+                  color="secondary"
+                  style={{ padding: ".5rem 1rem .5rem 1rem" }}
+                >
+                  Alex Hsieh
+                </Typography>
+              </Button>
+              <Typography
+                variant="body2"
+                color="secondary"
+                style={{
+                  padding: ".5rem 1rem .5rem 1rem",
+                  fontSize: ".8rem",
+                  fontFamily: "Roboto",
+                }}
+              >
+                created and desgined by @Alex Hsieh 2021
               </Typography>
-            </Button>
-          ))}
+              {/* sections */}
+              <div id="filler" style={{ flexGrow: 1 }} />
+              {props?.sections.map(({label, ref}, index) => (
+                <Button
+                  variant="subtitle1"
+                  className={classes.textButton}
+                  disableFocusRipple
+                  disableRipple
+                  key={index}
+                  onClick={() => props.scrollDownFunc && props.scrollDownFunc(ref)}
+                >
+                  <Typography variant="h6" style={{ padding: ".3rem" }}>
+                    <span className={classes.coloredText}>{`${label.substring(
+                      0,
+                      2
+                    )}`}</span>
+                    {label.substring(2)}
+                  </Typography>
+                </Button>
+              ))}
 
-          <div id="filler" style={{ width: "1.5rem" }} />
-          {/* */}
-          <Button
-            style={{ margin: "0 0 0 auto" }}
-            variant="outlined"
-            className={classes.button}
-          >
-            <Typography
-              variant="subtitle2"
-              className={classes.title}
-              style={{ border: "none" }}
-            >
-              Contact Me!
-            </Typography>
-          </Button>
-        </Toolbar>
-      </AppBar>
+              <div id="filler" style={{ width: "1.5rem" }} />
+              {/* */}
+              <Button
+                style={{ margin: "0 0 0 auto" }}
+                variant="outlined"
+                className={classes.button}
+                href={"mailto: {alex53632@outlook.com}"}
+              >
+                <Typography
+                  variant="subtitle2"
+                  className={classes.title}
+                  style={{ border: "none" }}
+                >
+                  Contact Me!
+                </Typography>
+              </Button>
+            </Toolbar>
+          </AppBar>
+        </Slide>
+      </ElevationScroll>
     </div>
   );
 };
