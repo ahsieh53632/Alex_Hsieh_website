@@ -131,7 +131,7 @@ const Header = (props) => {
                 style={{ margin: "0 0 0 auto" }}
                 variant="outlined"
                 className={classes.button}
-                href={"mailto: {alex53632@outlook.com}"}
+                href={"mailto: alex53632@outlook.com"}
               >
                 <Typography
                   variant="subtitle2"
