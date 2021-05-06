@@ -21,11 +21,12 @@ function TabPanel(props) {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
+      style={{overFlow: "auto", flexGrow: 1}}
     >
       {value === index && (
-        <Box p={3}>
+        <div style={{paddingTop: "12px", paddingLeft: "12px"}}>
           <div>{children}</div>
-        </Box>
+        </div>
       )}
     </div>
   );
@@ -50,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.text.main}`,
-    padding: "25px",
   },
 
   icon: {
@@ -64,14 +64,13 @@ const useStyles = makeStyles((theme) => ({
 
   position: {
     paddingLeft: "25px",
-    fontSize: "1.8rem",
     color: `${theme.palette.darkGreen.main}`,
   },
 
   descriptionContainer: {
     width: "60vw",
     height: "50vh",
-    marginLeft: "2rem",
+    paddingLeft: "2rem",
     overflowY: "scroll",
     display: "flex",
     flexDirection: "column",
@@ -79,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   description: {
-    fontSize: "1.2rem",
     letterSpacing: ".2rem",
     textAlign: "left",
   },
@@ -130,13 +128,14 @@ export default function VerticalTabs(props) {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  maxHeight: "45vh",
                 }}
               >
                 {/* <Avatar alt={item.name} src={item.logo} variant="square" className={classes.icon} /> */}
-                <Typography className={classes.position}>
-                  <span style={{ fontSize: "2.5rem", color: "white" }}>
+                <Typography variant="h3" className={classes.position}>
+                  <span>
+                    <Typography variant="h2" style={{color: "white", display: "inline"}}>
                     {item.position.substring(0, 2)}
+                    </Typography>
                   </span>
                   {item.position.substring(2)}
                 </Typography>
@@ -145,7 +144,7 @@ export default function VerticalTabs(props) {
                   {item.description.map((text, index) => (
                     <Typography
                       key={index}
-                      variant="subtitle1"
+                      variant="body1"
                       className={classes.description}
                     >
                       <Icon>

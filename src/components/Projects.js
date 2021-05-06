@@ -82,9 +82,9 @@ const useStyles = makeStyles((theme) => ({
 
   checkMoreButton: {
     color: "white",
-    fontSize: "1.5rem",
     borderRadius: "10px",
     padding: "30px",
+    margin: "15px",
     border: `3px dashed ${theme.palette.darkGreen.main}`,
     "&:hover": {
       backgroundColor: `${lighten(theme.palette.red.main, 0.7)}`,
@@ -112,56 +112,60 @@ function Projects(props) {
   const [active, setActive] = React.useState(false);
   return (
     <div style={{ height: "unset" }}>
-      
       <VizSensor
-          onChange={(isVisible) => {
-            setActive(isVisible);
-          }}
-          partialVisibility={true}
-          offset={{ bottom: 600, top: 500 }}
-        >
-      <div className={classes.root} ref={props?.forwardedRef}>
-        <div style={{ position: "absolute" }}>
-          <Particles height="100vh" width="90vw" params={particlesConfig} />
-        </div>
+        onChange={(isVisible) => {
+          setActive(isVisible);
+        }}
+        partialVisibility={true}
+        offset={{
+          bottom: `${window.innerHeight * 0.4}`,
+          top: `${window.innerHeight * 0.4}`,
+        }}
+      >
+        <div className={classes.root} ref={props?.forwardedRef}>
           <Slide in={active} direction="up" timeout={2000}>
-          <div>
-          <Fade in={active} timeout={1500}>
-          <div className={classes.ExpContainer}>
-            <span className={classes.spanCorner}></span>
-            <Typography variant="h2" className={classes.title} align="right">
-              Projects
-            </Typography>
-            <ColoredLine style={{ width: "50%", marginRight: "3rem" }} />
-            <div className={classes.projectContainer}>
-              {projectData.map((item, index) => (
-                <ProjectDescription
-                  key={index}
-                  direction={index % 2 === 0 ? "left" : "right"}
-                  {...item}
-                />
-              ))}
+            <div>
+              <Fade in={active} timeout={1500}>
+                <div className={classes.ExpContainer}>
+                  <span className={classes.spanCorner}></span>
+                  <Typography
+                    variant="h2"
+                    className={classes.title}
+                    align="right"
+                  >
+                    Projects
+                  </Typography>
+                  <ColoredLine style={{ width: "50%", marginRight: "3rem" }} />
+                  <div className={classes.projectContainer}>
+                    {projectData.map((item, index) => (
+                      <ProjectDescription
+                        key={index}
+                        direction={index % 2 === 0 ? "left" : "right"}
+                        {...item}
+                      />
+                    ))}
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Button
+                      className={classes.checkMoreButton}
+                      onClick={() =>
+                        window.open("https://github.com/ahsieh53632")
+                      }
+                    >
+                      <Typography variant="h5">{`Check out my github for more :)`}</Typography>
+                    </Button>
+                  </div>
+                </div>
+              </Fade>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <Button
-                className={classes.checkMoreButton}
-                onClick={() => window.open("https://github.com/ahsieh53632")}
-              >
-                {`Check out my github for more :)`}
-              </Button>
-            </div>
-          </div>
-          </Fade>
-          </div>
           </Slide>
-      </div>
-      
+        </div>
       </VizSensor>
     </div>
   );

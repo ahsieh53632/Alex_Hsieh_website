@@ -1,7 +1,7 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme, responsiveFontSizes  } from "@material-ui/core/styles";
 // import { lighten } from "@material-ui/core/styles/colorManipulator";
 
-export default createMuiTheme({
+export default responsiveFontSizes(createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -71,6 +71,35 @@ export default createMuiTheme({
       textTransform: "none",
       height: 40,
     },
+    h1: {
+      fontSize: "10rem",
+    },
+
+    h2: {
+      fontSize: "3rem",
+    },
+
+    h3: {
+      fontSize: "2rem"
+    },
+
+    h4: {
+      fontSize: '1.8rem'
+    },
+
+    h5: {
+      fontSize: '1.5rem'
+    },
+
+    body1: {
+      fontSize: '1.2rem'
+    },
+
+    body2: {
+      fontSize: '0.8rem'
+    },
+    
+
     fontFamily: ["Orbitron", "Roboto", "Hind", "Amatic SC", "Indie Flower", "Arial", "sans-serif"].join(","),
   },
   customs: {
@@ -113,4 +142,4 @@ export default createMuiTheme({
       flexDirection: "column",
     },
   },
-});
+}), ({factor: 3}));

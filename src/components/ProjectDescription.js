@@ -10,6 +10,8 @@ import {
   Chip,
   IconButton,
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { ReactComponent as ReactIcon } from "../icons/react.svg";
 import { ReactComponent as TensorFlowIcon } from "../icons/tensorflow.svg";
@@ -72,24 +74,25 @@ const useStyles = makeStyles((theme) => ({
 const textBlockStyles = makeStyles((theme) => ({
   projectName: {
     color: "white",
-    fontSize: "3rem",
   },
 
   description: {
-    fontSize: "1.5rem",
-    wordSpacing: ".33rem",
-    letterSpacing: ".33rem",
+    wordSpacing: ".35rem",
+    letterSpacing: ".2rem",
     color: `${lighten(theme.palette.text.main, 0.5)}`,
   },
 
   chip: {
     color: lighten(theme.palette.text.main, 0.7),
-    border: `2px solid ${lighten(theme.palette.text.main, 0.7)}`,
-    margin: "5px 5px 5px 10px",
-    padding: "15px",
+    borderColor: `${lighten(theme.palette.text.main, 0.7)}`,
+    marginLeft: ".5rem",
+    marginBottom: ".5rem"
+    // border: `2px solid ${lighten(theme.palette.text.main, 0.7)}`,
+    // margin: "5px 5px 5px 10px",
+    // padding: "15px",
   },
 
-  chipContainer: ({align, ...rest}) => ({
+  chipContainer: ({ align, ...rest }) => ({
     display: "flex",
     flexDirection: "row",
     flexGrow: 1,
@@ -111,7 +114,6 @@ const textBlockStyles = makeStyles((theme) => ({
 
   award: {
     color: `${lighten(theme.palette.red.main, 0.7)}`,
-    fontSize: "1.2rem",
   },
 
   textContainer: {
@@ -143,7 +145,7 @@ const textBlockStyles = makeStyles((theme) => ({
     },
   },
 
-  iconButton: ({align, ...rest}) => ({
+  iconButton: ({ align, ...rest }) => ({
     width: "60px",
     height: "60px",
     marginTop: "20px",
@@ -170,7 +172,7 @@ const TextBlock = ({
   img,
   ...rest
 }) => {
-  const classes = textBlockStyles(({align, ...rest}));
+  const classes = textBlockStyles({ align, ...rest });
 
   const logoMap = {
     React: <ReactIcon className={classes.icon} />,
@@ -186,11 +188,11 @@ const TextBlock = ({
   return (
     <div className={classes.textContainer}>
       <div>
-        <Typography className={classes.projectName} align={align}>
+        <Typography variant="h2" className={classes.projectName} align={align}>
           {projectName}
         </Typography>
         {award && (
-          <Typography className={classes.award} align={align}>
+          <Typography variant="body1" className={classes.award} align={align}>
             {award}
           </Typography>
         )}
@@ -207,7 +209,9 @@ const TextBlock = ({
         </Paper>
       </div>
       <div className={classes.descriptionBox}>
-        <Typography className={classes.description}>{description}</Typography>
+        <Typography variant="h5" className={classes.description}>
+          {description}
+        </Typography>
       </div>
       <div
         className={classes.tryItOut}
@@ -238,23 +242,35 @@ const TextBlock = ({
 
 function ProjectDescription(props) {
   const classes = useStyles(props);
+  const theme = useTheme();
+  const notSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
+  const showProjectPreview = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "600px" }}>
-      {props.direction !== "left" && (
+      {(props.direction !== "left" || !notSmallScreen) && (
         <div style={{ flexGrow: 1 }}>
           <TextBlock {...props} align="left" />
         </div>
       )}
-      <div style={{flexBasis: "50%", flexShrink: 0, display: "flex", flexDirection: "column", marginTop: "50px"}}>
-      <div className={classes.cover} />   
-        <Card className={classes.root} elevation={24}>
-          <CardContent>
-          </CardContent>
-        </Card>
-        <div id="filler" style={{flexGrow: 1}} />
-      </div>
-      {props.direction === "left" && (
+      {showProjectPreview && (
+        <div
+          style={{
+            flexBasis: "50%",
+            flexShrink: 0,
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "50px",
+          }}
+        >
+          <div className={classes.cover} />
+          <Card className={classes.root} elevation={24}>
+            <CardContent></CardContent>
+          </Card>
+          <div id="filler" style={{ flexGrow: 1 }} />
+        </div>
+      )}
+      {props.direction === "left" && notSmallScreen && (
         <div style={{ flexGrow: 1 }}>
           <TextBlock {...props} align="right" />
         </div>

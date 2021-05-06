@@ -1,12 +1,6 @@
 import React from "react";
 import VizSensor from "react-visibility-sensor";
-import {
-  makeStyles,
-  Typography,
-  lighten,
-  fade,
-  Fade,
-} from "@material-ui/core";
+import { makeStyles, Typography, lighten, fade, Fade } from "@material-ui/core";
 
 import experienceData from "../static/experience";
 import VerticleTabs from "./VerticleTab";
@@ -17,12 +11,11 @@ import particlesConfig from "../config/particlesConfig";
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "110vh",
-    paddingTop: "8%",
     backgroundColor: lighten(theme.palette.background.blue, 0.05),
-    scrollSnapAlign: "center",
-    scrollSnapType: "y mandatory"
     // backgroundPosition: "center 50%",
     //...theme.typography.fontFamily,
+    display: "flex",
+    flexDirection: "column",
   },
 
   HeaderText: {
@@ -93,34 +86,36 @@ function Experience(props) {
   const [active, setActive] = React.useState(false);
 
   return (
-    <div className={classes.root} ref={props?.forwardedRef}>
-      <VizSensor
-        onChange={(isVisible) => {
-          // if (active && !isVisible) return
-          setActive(isVisible);
-        }}
-        partialVisibility={true}
-        offset={{ bottom: 500, top: 500 }}
-      >
-        <div style={{ position: "absolute" }}>
-          <Particles height="90vh" width="90vw" params={particlesConfig} />
+    <VizSensor
+      onChange={(isVisible) => {
+        // if (active && !isVisible) return
+        setActive(isVisible);
+      }}
+      partialVisibility={true}
+      offset={{
+        bottom: `${window.innerHeight * 0.5}`,
+        top: `${window.innerHeight * 0.4}`,
+      }}
+    >
+      <div className={classes.root} ref={props?.forwardedRef}>
+        {/* <Slide in={active} direction="right" timeout={{enter: 1500, exit: 1500}}> */}
+        <div id="filler" style={{ flexGrow: 1 }} />
+        <div>
+          <Fade in={active} timeout={{ enter: 800, exit: 800 }}>
+            <div className={classes.ExpContainer}>
+              <span className={classes.spanCorner}></span>
+              <Typography variant="h2" className={classes.title}>
+                Experience
+              </Typography>
+              <ColoredLine style={{ width: "50%", marginLeft: "3rem" }} />
+              <VerticleTabs data={experienceData} />
+            </div>
+          </Fade>
         </div>
-      </VizSensor>
-      {/* <Slide in={active} direction="right" timeout={{enter: 1500, exit: 1500}}> */}
-      <div>
-        <Fade in={active} timeout={{ enter: 800, exit: 800 }}>
-          <div className={classes.ExpContainer}>
-            <span className={classes.spanCorner}></span>
-            <Typography variant="h2" className={classes.title}>
-              Experience
-            </Typography>
-            <ColoredLine style={{ width: "50%", marginLeft: "3rem" }} />
-            <VerticleTabs data={experienceData} />
-          </div>
-        </Fade>
+        <div id="filler" style={{ flexGrow: 1 }} />
+        {/* </Slide> */}
       </div>
-      {/* </Slide> */}
-    </div>
+    </VizSensor>
   );
 }
 

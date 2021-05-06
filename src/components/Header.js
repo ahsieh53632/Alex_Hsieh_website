@@ -7,8 +7,13 @@ import {
   Button,
   Slide,
   fade,
+  Fade,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import zIndex from "@material-ui/core/styles/zIndex";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -52,8 +57,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.25rem",
     // paddingRight: ".3rem",
   },
-}));
 
+  alert: {
+    transition: "all 500ms ease",
+    zIndex: 50,
+    margin: "5px 10px 0 10px",
+    position: "fixed",
+  },
+}));
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -75,73 +86,98 @@ const Header = (props) => {
   const classes = useStyles();
   const trigger = useScrollTrigger();
 
+  const theme = useTheme();
+  const notSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const [showWarning, setShowWarning] = React.useState(true);
+
   return (
     <div>
+      {!notSmallScreen && (
+        <div
+          style={{
+            top: !trigger ? "75px" : "0px",
+            opacity: showWarning ? "100%" : "0%",
+          }}
+          className={classes.alert}
+        >
+          <Alert severity="warning">
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              Please view this page on your computer for better experience
+              <Button onClick={() => setShowWarning(false)}>x</Button>
+            </div>
+          </Alert>
+        </div>
+      )}
       <ElevationScroll {...props}>
         <Slide appear={false} direction="down" in={!trigger}>
-          <AppBar className={classes.appbar} elevation={1} sticky="true">
-            <Toolbar className={classes.toolbar}>
-              <Button
-                onClick={() => props.scrollDownFunc && props.scrollDownFunc(props.mainRef)}
-              >
-                <Typography
-                  variant="body2"
-                  className={classes.title}
-                  color="secondary"
-                  style={{ padding: ".5rem 1rem .5rem 1rem" }}
-                >
-                  Alex Hsieh
-                </Typography>
-              </Button>
-              <Typography
-                variant="body2"
-                color="secondary"
-                style={{
-                  padding: ".5rem 1rem .5rem 1rem",
-                  fontSize: ".8rem",
-                  fontFamily: "Roboto",
-                }}
-              >
-                created and desgined by @Alex Hsieh 2021
-              </Typography>
-              {/* sections */}
-              <div id="filler" style={{ flexGrow: 1 }} />
-              {props?.sections.map(({label, ref}, index) => (
+          <div>
+            <AppBar className={classes.appbar} elevation={1} sticky="true">
+              <Toolbar className={classes.toolbar}>
                 <Button
-                  className={classes.textButton}
-                  disableFocusRipple
-                  disableRipple
-                  key={index}
-                  onClick={() => props.scrollDownFunc && props.scrollDownFunc(ref)}
+                  onClick={() =>
+                    props.scrollDownFunc && props.scrollDownFunc(props.mainRef)
+                  }
                 >
-                  <Typography variant="h6" style={{ padding: ".3rem" }}>
-                    <span className={classes.coloredText}>{`${label.substring(
-                      0,
-                      2
-                    )}`}</span>
-                    {label.substring(2)}
+                  <Typography
+                    variant="body2"
+                    className={classes.title}
+                    color="secondary"
+                    style={{ padding: ".5rem 1rem .5rem 1rem" }}
+                  >
+                    Alex Hsieh
                   </Typography>
                 </Button>
-              ))}
-
-              <div id="filler" style={{ width: "1.5rem" }} />
-              {/* */}
-              <Button
-                style={{ margin: "0 0 0 auto" }}
-                variant="outlined"
-                className={classes.button}
-                href={"mailto: alex53632@outlook.com"}
-              >
                 <Typography
-                  variant="subtitle2"
-                  className={classes.title}
-                  style={{ border: "none" }}
+                  variant="body2"
+                  color="secondary"
+                  style={{
+                    padding: ".5rem 1rem .5rem 1rem",
+                    fontFamily: "Roboto",
+                  }}
                 >
-                  Contact Me!
+                  created and desgined by @Alex Hsieh 2021
                 </Typography>
-              </Button>
-            </Toolbar>
-          </AppBar>
+                {/* sections */}
+                <div id="filler" style={{ flexGrow: 1 }} />
+                {notSmallScreen &&
+                  props?.sections.map(({ label, ref }, index) => (
+                    <Button
+                      className={classes.textButton}
+                      disableFocusRipple
+                      disableRipple
+                      key={index}
+                      onClick={() =>
+                        props.scrollDownFunc && props.scrollDownFunc(ref)
+                      }
+                    >
+                      <Typography variant="body1" style={{ padding: ".3rem" }}>
+                        <span
+                          className={classes.coloredText}
+                        >{`${label.substring(0, 2)}`}</span>
+                        {label.substring(2)}
+                      </Typography>
+                    </Button>
+                  ))}
+                <div id="filler" style={{ width: "1.5rem" }} />
+                {/* */}
+                <Button
+                  style={{ margin: "0 0 0 auto" }}
+                  variant="outlined"
+                  className={classes.button}
+                  href={"mailto: alex53632@outlook.com"}
+                >
+                  <Typography
+                    variant="subtitle2"
+                    className={classes.title}
+                    style={{ border: "none" }}
+                  >
+                    Contact Me!
+                  </Typography>
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </div>
         </Slide>
       </ElevationScroll>
     </div>
