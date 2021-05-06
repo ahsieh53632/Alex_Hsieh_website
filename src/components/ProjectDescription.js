@@ -146,8 +146,8 @@ const textBlockStyles = makeStyles((theme) => ({
   },
 
   iconButton: ({ align, ...rest }) => ({
-    width: "60px",
-    height: "60px",
+    width: "5rem",
+    height: "5rem",
     marginTop: "20px",
     transform: align !== "left" ? "translateX(12px)" : "translateX(-12px)",
     background: "#233554",
@@ -229,8 +229,6 @@ const TextBlock = ({
           <IconButton
             className={classes.iconButton}
             onClick={() => window.open(`${demoLink}`)}
-            disableFocusRipple
-            disableTouchRipple
           >
             <DemoIcon className={classes.bottomIcons} />
           </IconButton>
