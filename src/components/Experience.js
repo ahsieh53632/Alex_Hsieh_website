@@ -16,8 +16,8 @@ import particlesConfig from "../config/particlesConfig";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: "100vh",
-    paddingTop: "5%",
+    minHeight: "110vh",
+    paddingTop: "8%",
     backgroundColor: lighten(theme.palette.background.blue, 0.05),
     scrollSnapAlign: "center",
     scrollSnapType: "y mandatory"
