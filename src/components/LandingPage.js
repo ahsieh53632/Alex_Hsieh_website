@@ -110,7 +110,7 @@ function LandingPage(props) {
   const classes = useStyles(props);
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} ref={props.forwardedRef}>
       <div style={{ position: "absolute" }}>
         <Particles height="90vh" width="90vw" params={particlesConfig} />
       </div>

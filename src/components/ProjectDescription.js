@@ -8,7 +8,6 @@ import {
   CardContent,
   Paper,
   Chip,
-  Avatar,
   IconButton,
 } from "@material-ui/core";
 
@@ -18,7 +17,7 @@ import { ReactComponent as NodeIcon } from "../icons/node.svg";
 import { ReactComponent as GithubIcon } from "../icons/github.svg";
 import { ReactComponent as PyTorchIcon } from "../icons/pytorch.svg";
 import { ReactComponent as PythonIcon } from "../icons/python.svg";
-import { ReactComponent as AWSIcon } from "../icons/aws.svg";
+// import { ReactComponent as AWSIcon } from "../icons/aws.svg";
 import { ReactComponent as FlaskIcon } from "../icons/flask.svg";
 import { ReactComponent as DemoIcon } from "../icons/demo.svg";
 import bitcamp from "../icons/bitcamp.png";
@@ -180,6 +179,7 @@ const TextBlock = ({
     Node: <NodeIcon className={classes.icon} />,
     Python: <PythonIcon className={classes.icon} />,
     Flask: <FlaskIcon className={classes.icon} />,
+    // "AWS S3": <AWSIcon className={classes.icon} />,
     bitcamp: bitcamp,
   };
 

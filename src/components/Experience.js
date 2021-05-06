@@ -5,10 +5,6 @@ import {
   Typography,
   lighten,
   fade,
-  Tab,
-  Tabs,
-  Box,
-  Slide,
   Fade,
 } from "@material-ui/core";
 

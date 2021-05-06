@@ -2,12 +2,9 @@ import React from "react";
 import {
   makeStyles,
   Typography,
-  lighten,
-  fade,
   Tab,
   Tabs,
   Box,
-  Avatar,
   Icon,
   Fade,
 } from "@material-ui/core";

@@ -1,7 +1,6 @@
 import React from "react";
-import { makeStyles, Card, Typography, fade } from "@material-ui/core";
+import { makeStyles, fade } from "@material-ui/core";
 import { CssBaseline } from "@material-ui/core";
-import logo from "./logo.svg";
 import Header from "./components/Header";
 import LandingPage from "./components/LandingPage"
 import Experience from "./components/Experience"

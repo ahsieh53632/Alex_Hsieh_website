@@ -4,8 +4,6 @@ import {
   makeStyles,
   Typography,
   lighten,
-  fade,
-  Box,
   Button,
   Fade,
   Slide,
@@ -112,7 +110,6 @@ function Projects(props) {
   const classes = useStyles();
 
   const [active, setActive] = React.useState(false);
-  console.log(active);
   return (
     <div style={{ height: "unset" }}>
       
