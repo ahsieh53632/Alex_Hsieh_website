@@ -86,7 +86,7 @@ const textBlockStyles = makeStyles((theme) => ({
     color: lighten(theme.palette.text.main, 0.7),
     borderColor: `${lighten(theme.palette.text.main, 0.7)}`,
     marginLeft: ".5rem",
-    marginBottom: ".5rem"
+    marginBottom: ".5rem",
     // border: `2px solid ${lighten(theme.palette.text.main, 0.7)}`,
     // margin: "5px 5px 5px 10px",
     // padding: "15px",
@@ -139,6 +139,8 @@ const textBlockStyles = makeStyles((theme) => ({
 
   bottomIcons: {
     fill: "white",
+    minWidth: "35px",
+    minHeight: "35px",
     "&:hover": {
       transition: "all 300ms ease",
       fill: `${lighten(theme.palette.secondary.main, 0.3)}`,
@@ -146,8 +148,8 @@ const textBlockStyles = makeStyles((theme) => ({
   },
 
   iconButton: ({ align, ...rest }) => ({
-    width: "60px",
-    height: "60px",
+    width: "65px",
+    height: "65px",
     transform: align !== "left" ? "translateX(12px)" : "translateX(-12px)",
     background: "#233554",
   }),
@@ -231,10 +233,7 @@ const TextBlock = ({
           >
             <DemoIcon className={classes.bottomIcons} />
           </IconButton>
-
-          
         )}
-          <img src="https://img.icons8.com/ios/452/database-export.png" style={{margin: "20px", width: "50px", height: "50px", filter: ""}} />
       </div>
     </div>
   );
