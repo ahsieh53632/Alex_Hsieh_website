@@ -201,6 +201,7 @@ const TextBlock = ({
               label={item}
               className={classes.chip}
               variant="outlined"
+              key={index}
             ></Chip>
           ))}
         </Paper>

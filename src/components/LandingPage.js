@@ -96,13 +96,21 @@ const useStyles = makeStyles((theme) => ({
       transition: "all 500ms ease",
     },
   },
+
+  
+  container: {
+    minHeight: "100vh",
+    width: "90%",
+    margin: "0 auto",
+    paddingLeft: "1.6rem",
+  },
 }));
 
 function LandingPage(props) {
   const classes = useStyles(props);
 
   return (
-    <>
+    <div className={classes.container}>
       <div style={{ position: "absolute" }}>
         <Particles height="90vh" width="90vw" params={particlesConfig} />
       </div>
@@ -188,7 +196,7 @@ function LandingPage(props) {
           }}
         />
       </IconButton>
-    </>
+    </div>
   );
 }
 

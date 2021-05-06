@@ -1,4 +1,5 @@
 import React from "react";
+import VizSensor from "react-visibility-sensor";
 import {
   makeStyles,
   Typography,
@@ -6,17 +7,16 @@ import {
   fade,
   Box,
   Button,
+  Fade,
+  Slide,
 } from "@material-ui/core";
-
-import experienceData from "../static/experience";
-import VerticleTabs from "./VerticleTab";
 
 import Particles from "react-particles-js";
 import particlesConfig from "../config/particlesConfig";
 
 import ProjectDescription from "./ProjectDescription";
 
-import projectData from "../static/projectData"
+import projectData from "../static/projectData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,11 +88,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     padding: "30px",
     border: `3px dashed ${theme.palette.darkGreen.main}`,
-    "&:hover" : {
-      backgroundColor: `${lighten(theme.palette.red.main, .7)}`,
-      border: "none"
-    }
-  }
+    "&:hover": {
+      backgroundColor: `${lighten(theme.palette.red.main, 0.7)}`,
+      border: "none",
+    },
+  },
 }));
 
 const ColoredLine = ({ color = "#8892b0", style }) => (
@@ -111,32 +111,61 @@ const ColoredLine = ({ color = "#8892b0", style }) => (
 function Projects(props) {
   const classes = useStyles();
 
+  const [active, setActive] = React.useState(false);
+  console.log(active);
   return (
     <div style={{ height: "unset" }}>
+      
+      <VizSensor
+          onChange={(isVisible) => {
+            setActive(isVisible);
+          }}
+          partialVisibility={true}
+          offset={{ bottom: 600, top: 500 }}
+        >
       <div className={classes.root} ref={props?.forwardedRef}>
         <div style={{ position: "absolute" }}>
           <Particles height="100vh" width="90vw" params={particlesConfig} />
         </div>
-        <div className={classes.ExpContainer}>
-          <span className={classes.spanCorner}></span>
-          <Typography variant="h2" className={classes.title} align="right">
-            Projects
-          </Typography>
-          <ColoredLine style={{ width: "50%", marginRight: "3rem" }} />
-          <div className={classes.projectContainer}>
-            {projectData.map((item, index) => (
-              <ProjectDescription direction={index % 2 === 0 ? "left" : "right"} {...item}/>
-            ))}
-          </div>
-          <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-            <Button className={classes.checkMoreButton}
-              onClick={() => window.open("https://github.com/ahsieh53632")}
+          <Slide in={active} direction="up" timeout={2000}>
+          <div>
+          <Fade in={active} timeout={1500}>
+          <div className={classes.ExpContainer}>
+            <span className={classes.spanCorner}></span>
+            <Typography variant="h2" className={classes.title} align="right">
+              Projects
+            </Typography>
+            <ColoredLine style={{ width: "50%", marginRight: "3rem" }} />
+            <div className={classes.projectContainer}>
+              {projectData.map((item, index) => (
+                <ProjectDescription
+                  key={index}
+                  direction={index % 2 === 0 ? "left" : "right"}
+                  {...item}
+                />
+              ))}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
             >
-              {`Check out my github for more :)`}
-            </Button>
+              <Button
+                className={classes.checkMoreButton}
+                onClick={() => window.open("https://github.com/ahsieh53632")}
+              >
+                {`Check out my github for more :)`}
+              </Button>
+            </div>
           </div>
-        </div>
+          </Fade>
+          </div>
+          </Slide>
       </div>
+      
+      </VizSensor>
     </div>
   );
 }

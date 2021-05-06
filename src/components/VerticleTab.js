@@ -9,6 +9,7 @@ import {
   Box,
   Avatar,
   Icon,
+  Fade,
 } from "@material-ui/core";
 
 import { ReactComponent as ArrowRight } from "../icons/right.svg";
@@ -26,7 +27,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -35,6 +36,7 @@ function TabPanel(props) {
 
 function a11yProps(index) {
   return {
+    key: `tab-${index}`,
     id: `vertical-tab-${index}`,
     "aria-controls": `vertical-tabpanel-${index}`,
   };
@@ -65,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
   position: {
     paddingLeft: "25px",
+    fontSize: "1.8rem",
     color: `${theme.palette.darkGreen.main}`,
   },
 
@@ -75,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "scroll",
     display: "flex",
     flexDirection: "column",
-    overflowWrap: "break-word"
+    overflowWrap: "break-word",
   },
 
   description: {
@@ -91,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     paddingTop: "2rem",
     paddingBottom: "0",
-  }
+  },
 }));
 
 export default function VerticalTabs(props) {
@@ -109,9 +112,8 @@ export default function VerticalTabs(props) {
         variant="scrollable"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
+        aria-label="Vertical tabs"
         className={classes.tabs}
-        disableRipple
       >
         {props.data &&
           props.data.map((item, index) => (
@@ -122,33 +124,43 @@ export default function VerticalTabs(props) {
             />
           ))}
       </Tabs>
-
+      
       {props.data &&
         props.data.map((item, index) => (
-          <TabPanel value={value} index={index}>
-            <div style={{ display: "flex", flexDirection: "column", maxHeight: "45vh" }}>
-              {/* <Avatar alt={item.name} src={item.logo} variant="square" className={classes.icon} /> */}
-              <Typography variant="h5" className={classes.position}>
-                <span style={{ fontSize: "2.5rem", color: "white" }}>
-                  {item.position.substring(0, 2)}
-                </span>
-                {item.position.substring(2)}
-              </Typography>
+          <Fade in={value === index} timeout={850} key={index}>
+            <TabPanel value={value} index={index} key={index}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  maxHeight: "45vh",
+                }}
+              >
+                {/* <Avatar alt={item.name} src={item.logo} variant="square" className={classes.icon} /> */}
+                <Typography className={classes.position}>
+                  <span style={{ fontSize: "2.5rem", color: "white" }}>
+                    {item.position.substring(0, 2)}
+                  </span>
+                  {item.position.substring(2)}
+                </Typography>
 
-              <div className={classes.descriptionContainer}>
-                {item.description.map((text, index) => (
-                  <Typography
-                    key={index}
-                    variant="subtitle1"
-                    className={classes.description}
-                  >
-                    <Icon><ArrowRight className={classes.arrowRight} /></Icon>
-                    {text}
-                  </Typography>
-                ))}
+                <div className={classes.descriptionContainer}>
+                  {item.description.map((text, index) => (
+                    <Typography
+                      key={index}
+                      variant="subtitle1"
+                      className={classes.description}
+                    >
+                      <Icon>
+                        <ArrowRight className={classes.arrowRight} />
+                      </Icon>
+                      {text}
+                    </Typography>
+                  ))}
+                </div>
               </div>
-            </div>
-          </TabPanel>
+            </TabPanel>
+          </Fade>
         ))}
     </div>
   );

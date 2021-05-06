@@ -108,7 +108,6 @@ const Header = (props) => {
               <div id="filler" style={{ flexGrow: 1 }} />
               {props?.sections.map(({label, ref}, index) => (
                 <Button
-                  variant="subtitle1"
                   className={classes.textButton}
                   disableFocusRipple
                   disableRipple

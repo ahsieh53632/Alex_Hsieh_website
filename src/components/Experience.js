@@ -1,4 +1,5 @@
 import React from "react";
+import VizSensor from "react-visibility-sensor";
 import {
   makeStyles,
   Typography,
@@ -7,6 +8,8 @@ import {
   Tab,
   Tabs,
   Box,
+  Slide,
+  Fade,
 } from "@material-ui/core";
 
 import experienceData from "../static/experience";
@@ -20,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
     paddingTop: "5%",
     backgroundColor: lighten(theme.palette.background.blue, 0.05),
+    scrollSnapAlign: "center",
+    scrollSnapType: "y mandatory"
     // backgroundPosition: "center 50%",
     //...theme.typography.fontFamily,
   },
@@ -89,22 +94,37 @@ const ColoredLine = ({ color = "#8892b0", style }) => (
 function Experience(props) {
   const classes = useStyles();
 
+  const [active, setActive] = React.useState(false);
+
   return (
-    <>
-      <div style={{ position: "absolute" }}>
-        <Particles height="90vh" width="90vw" params={particlesConfig} />
-      </div>
-      <div className={classes.root} ref={props?.forwardedRef}>
-        <div className={classes.ExpContainer}>
-          <span className={classes.spanCorner}></span>
-          <Typography variant="h2" className={classes.title}>
-            Experience
-          </Typography>
-          <ColoredLine style={{ width: "50%", marginLeft: "3rem" }} />
-          <VerticleTabs data={experienceData} />
+    <div className={classes.root} ref={props?.forwardedRef}>
+      <VizSensor
+        onChange={(isVisible) => {
+          // if (active && !isVisible) return
+          setActive(isVisible);
+        }}
+        partialVisibility={true}
+        offset={{ bottom: 500, top: 500 }}
+      >
+        <div style={{ position: "absolute" }}>
+          <Particles height="90vh" width="90vw" params={particlesConfig} />
         </div>
+      </VizSensor>
+      {/* <Slide in={active} direction="right" timeout={{enter: 1500, exit: 1500}}> */}
+      <div>
+        <Fade in={active} timeout={{ enter: 800, exit: 800 }}>
+          <div className={classes.ExpContainer}>
+            <span className={classes.spanCorner}></span>
+            <Typography variant="h2" className={classes.title}>
+              Experience
+            </Typography>
+            <ColoredLine style={{ width: "50%", marginLeft: "3rem" }} />
+            <VerticleTabs data={experienceData} />
+          </div>
+        </Fade>
       </div>
-    </>
+      {/* </Slide> */}
+    </div>
   );
 }
 

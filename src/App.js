@@ -16,13 +16,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.fontFamily,
   },
 
-  container: {
-    minHeight: "100vh",
-    width: "90%",
-    margin: "0 auto",
-    paddingLeft: "1.6rem",
-  },
-
   Card: {
     background: `linear-gradient(to bottom right, ${fade(theme.palette.darkGreen.main, .5)}, 60%, ${fade("#cad2c5", .5)})`,
     borderRadius: "15px",
@@ -41,8 +34,6 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute"
   }
 }));
-
-const sections = ["experience", "projects"];
 
 
 function App() {
@@ -71,9 +62,7 @@ function App() {
     <div className={classes.root}>
       <CssBaseline />
       <Header sections={sections} scrollDownFunc={scrollDown} mainRef={mainRef}/>
-      <div className={classes.container} ref={mainRef}>
-        <LandingPage scrollDownFunc={scrollDown} ref={mainRef} />
-      </div>
+      <LandingPage scrollDownFunc={scrollDown} ref={mainRef} />
       <Experience  ref={expRef}/>
       <Projects ref={projectsRef} />
     </div>
