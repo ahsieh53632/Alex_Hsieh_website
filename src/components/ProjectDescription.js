@@ -25,16 +25,16 @@ import bitcamp from "../icons/bitcamp.png";
 
 const useStyles = makeStyles((theme) => ({
   root: ({ img, ...rest }) => ({
-    width: "35vw",
-    height: "25vw",
-    maxWidth: "60vw",
-    maxHeight: "600px",
+    width: "100%",
+    height: "100%",
+    // maxWidth: "60vw",
+    // maxHeight: "600px",
     background: `url(${process.env.PUBLIC_URL + "/img/" + img})`,
     backgroundSize: "cover",
     backgroundPosition: "50% 50%",
     backgroundRepeat: "no-repeat",
-    margin: "50px",
-    flexShrink: 0,
+    flexBasis: "90%",
+    padding: "10%",
     "&:hover": {
       backgroundImage: `url(${process.env.PUBLIC_URL + "/img/" + img})`,
       transition: "opacity 500ms ease-out",
@@ -50,9 +50,11 @@ const useStyles = makeStyles((theme) => ({
 
   cover: {
     backgroundColor: `${fade("#379683", 0.7)}`,
-    width: "35vw",
-    height: "25vw",
-    maxHeight: "600px",
+    width: "50%",
+    height: "calc(550px*.9)",
+    position: "absolute",
+    borderRadius: "5px",
+    // height: "25vw",
     transition: "opacity 500ms ease-in-out",
 
     "&:hover": {
@@ -237,19 +239,20 @@ function ProjectDescription(props) {
   const classes = useStyles(props);
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", maxHeight: "600px" }}>
+    <div style={{ display: "flex", flexDirection: "row", height: "600px" }}>
       {props.direction !== "left" && (
         <div style={{ flexGrow: 1 }}>
           <TextBlock {...props} align="left" />
         </div>
       )}
-
-      <Card className={classes.root} elevation={24}>
-        <CardContent style={{ margin: 0, padding: 0 }}>
-          <div className={classes.cover} />
-        </CardContent>
-      </Card>
-
+      <div style={{flexBasis: "50%", flexShrink: 0, display: "flex", flexDirection: "column", marginTop: "50px"}}>
+      <div className={classes.cover} />   
+        <Card className={classes.root} elevation={24}>
+          <CardContent>
+          </CardContent>
+        </Card>
+        <div id="filler" style={{flexGrow: 1}} />
+      </div>
       {props.direction === "left" && (
         <div style={{ flexGrow: 1 }}>
           <TextBlock {...props} align="right" />
