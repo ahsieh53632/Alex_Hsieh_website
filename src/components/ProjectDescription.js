@@ -80,7 +80,6 @@ const textBlockStyles = makeStyles((theme) => ({
     fontSize: "1.5rem",
     wordSpacing: ".33rem",
     letterSpacing: ".33rem",
-    paddingTop: "1.5rem",
     color: `${lighten(theme.palette.text.main, 0.5)}`,
   },
 
@@ -102,6 +101,7 @@ const textBlockStyles = makeStyles((theme) => ({
     paddingTop: "15px",
     margin: 0,
     background: "transparent",
+    marginBottom: "1.5rem",
   }),
 
   icon: {
