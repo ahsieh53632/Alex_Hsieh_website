@@ -231,7 +231,10 @@ const TextBlock = ({
           >
             <DemoIcon className={classes.bottomIcons} />
           </IconButton>
+
+          
         )}
+          <img src="https://img.icons8.com/ios/452/database-export.png" style={{margin: "20px", width: "50px", height: "50px", filter: ""}} />
       </div>
     </div>
   );
