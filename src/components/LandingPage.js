@@ -9,9 +9,6 @@ import {
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import Particles from "react-particles-js";
-import particlesConfig from "../config/particlesConfig";
-
 import { ReactComponent as GithubIcon } from "../icons/github.svg";
 import { ReactComponent as LinkedInIcon } from "../icons/linkedin.svg";
 import { ReactComponent as ScrollDownIcon } from "../icons/scrollDown.svg";

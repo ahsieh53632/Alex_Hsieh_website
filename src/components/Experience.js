@@ -2,11 +2,12 @@ import React from "react";
 import VizSensor from "react-visibility-sensor";
 import { makeStyles, Typography, lighten, fade, Fade } from "@material-ui/core";
 
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 import experienceData from "../static/experience";
 import VerticleTabs from "./VerticleTab";
 
-import Particles from "react-particles-js";
-import particlesConfig from "../config/particlesConfig";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +85,8 @@ function Experience(props) {
   const classes = useStyles();
 
   const [active, setActive] = React.useState(false);
+  const theme = useTheme();
+  const notSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <VizSensor
@@ -102,7 +105,7 @@ function Experience(props) {
         <div id="filler" style={{ flexGrow: 1 }} />
         <div>
           <Fade in={active} timeout={{ enter: 800, exit: 800 }}>
-            <div className={classes.ExpContainer}>
+            <div className={classes.ExpContainer} style={{width: !notSmallScreen ? "95vw" : "80vw"}}>
               <span className={classes.spanCorner}></span>
               <Typography variant="h2" className={classes.title}>
                 Experience

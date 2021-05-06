@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.text.main}`,
+    minWidth: "88px",
   },
 
   icon: {

@@ -9,9 +9,6 @@ import {
   Slide,
 } from "@material-ui/core";
 
-import Particles from "react-particles-js";
-import particlesConfig from "../config/particlesConfig";
-
 import ProjectDescription from "./ProjectDescription";
 
 import projectData from "../static/projectData";
