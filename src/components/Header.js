@@ -68,9 +68,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ElevationScroll(props) {
   const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
@@ -78,7 +75,7 @@ function ElevationScroll(props) {
   });
 
   return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
+    elevation: trigger ? 15 : 0,
   });
 }
 
@@ -110,8 +107,8 @@ const Header = (props) => {
         </div>
       )}
       <ElevationScroll {...props}>
+        <div>
         <Slide appear={false} direction="down" in={!trigger}>
-          <div>
             <AppBar className={classes.appbar} elevation={1} sticky="true">
               <Toolbar className={classes.toolbar}>
                 <Button
@@ -177,8 +174,8 @@ const Header = (props) => {
                 </Button>
               </Toolbar>
             </AppBar>
-          </div>
         </Slide>
+        </div>
       </ElevationScroll>
     </div>
   );
