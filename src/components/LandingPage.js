@@ -217,7 +217,7 @@ function LandingPage(props) {
           justifyContent: "center",
           position: "absolute",
           bottom: "2%",
-          width: "90%",
+          width: "calc(100% - 1.6rem)"
         }}
       >
         <IconButton
