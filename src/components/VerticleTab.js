@@ -21,7 +21,7 @@ function TabPanel(props) {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
-      style={{overFlow: "auto", flexGrow: 1}}
+      style={{overFlow: "auto", flexGrow: 1, opacity: value !== index ? 0 : 1}}
     >
       {value === index && (
         <div style={{paddingTop: "12px", paddingLeft: "12px"}}>
@@ -123,7 +123,8 @@ export default function VerticalTabs(props) {
       
       {props.data &&
         props.data.map((item, index) => (
-          <Fade in={value === index} timeout={850} key={index}>
+          <Fade in={value === index} timeout={850} key={index} unmountOnExit>
+            <div>
             <TabPanel value={value} index={index} key={index}>
               <div
                 style={{
@@ -157,6 +158,7 @@ export default function VerticalTabs(props) {
                 </div>
               </div>
             </TabPanel>
+            </div>
           </Fade>
         ))}
     </div>
