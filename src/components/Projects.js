@@ -62,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: "-5px",
       right: "-5px",
-      borderTop: "3px solid white",
-      borderRight: "3px solid white",
+      borderTop: "5px solid white",
+      borderRight: "5px solid white",
     },
   },
 
