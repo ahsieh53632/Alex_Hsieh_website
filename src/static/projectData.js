@@ -4,7 +4,7 @@ const projectData = ([
         award: "Most Entertaining Hack @ BitCamp2021",
         awardLogo: "bitcamp",
         img: "jmf.png",
-        projectName: "Judge My Fasion",
+        projectName: "Judge My Fashion",
         description: "A program that uses deep neural networks to analyze and determine your primary fashion style and then insult it accordingly.",
         featureLanguage: ["React", "Node", "Flask", "TensorFlow"],
         github: "https://github.com/penghaolu/judge-my-fashion",
