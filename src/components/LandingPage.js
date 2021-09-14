@@ -162,7 +162,7 @@ function LandingPage(props) {
             I am interested in full-stack development and Computer Vision
           </Typography>
           <Typography variant="h5" className={classes.subTitle}>
-            Senior @ University of Maryland - College Park, Expected May 2021
+            CS @ University of Maryland - College Park
           </Typography>
           <div className={classes.iconDrawer}>
             <IconButton
@@ -186,7 +186,7 @@ function LandingPage(props) {
               className={classes.resumeButton}
               onClick={() =>
                 window.open(
-                  "https://drive.google.com/file/d/1o64Ugjwgto8Hn4aa7Sv9MPpfzbVSkRBH/view?usp=sharing"
+                  ""
                 )
               }
             >
