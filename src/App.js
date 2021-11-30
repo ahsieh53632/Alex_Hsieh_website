@@ -52,7 +52,7 @@ function App() {
 
   const sections = [
     {
-      label: "experince",
+      label: "experience",
       ref: expRef,
     },
     {
